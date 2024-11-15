@@ -5,16 +5,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentContainerView
+import com.google.android.material.button.MaterialButton
 
 class Nilai : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.nilai)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val btn_uts:MaterialButton = findViewById(R.id.btn_uts)
+        val btn_uas:MaterialButton = findViewById(R.id.btn_uas)
+        val fcv_nilai:FragmentContainerView = findViewById(R.id.fcv_nilai)
+
+        supportFragmentManager.beginTransaction().replace(fcv_nilai.id, Uts()).commit()
+
+        btn_uts.setOnClickListener{
+            supportFragmentManager.beginTransaction().replace(fcv_nilai.id, Uts()).commit()
         }
+
+        btn_uas.setOnClickListener{
+            supportFragmentManager.beginTransaction().replace(fcv_nilai.id, Uas()).commit()
+        }
+
     }
 }
